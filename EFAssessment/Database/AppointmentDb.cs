@@ -21,7 +21,7 @@ public class AppointmentDb : DbContext
 
 public static class DbExtension
 {
-    public static IServiceCollection AddEshopDb(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddAppointmentDb(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<AppointmentDb>(options =>
         {
