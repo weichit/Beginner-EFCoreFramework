@@ -2,6 +2,8 @@
 using EFAssessment.Services;
 using EFAssessment.Entities;
 using Microsoft.AspNetCore.Mvc;
+using EFAssessment.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFAssessment.Controllers
 {
@@ -10,9 +12,11 @@ namespace EFAssessment.Controllers
     public class DoctorController : ControllerBase
     {
         private readonly IDoctorService _doctorService;
+        private AppointmentDb _db;
 
-        public DoctorController(IDoctorService doctorService )
+        public DoctorController(AppointmentDb db, IDoctorService doctorService )
         {
+            _db = db;
             _doctorService = doctorService;
         }
 
@@ -36,7 +40,20 @@ namespace EFAssessment.Controllers
             }
 
             await _doctorService.CreateDoctor(doctor);
+            _db.Doctors.Add(doctor);
+            await _db.SaveChangesAsync();
             return Ok("Doctor availability created ... ");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromHeader] string? name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return Ok(_db.Doctors.ToList());    
+            }
+            var doctor = await _db.Doctors.Where(item => item.DoctorName == name).SingleOrDefaultAsync();
+            return Ok(doctor);
         }
 
     }
