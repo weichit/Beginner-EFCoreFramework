@@ -4,11 +4,11 @@ namespace EFAssessment.Repositories
 {
     public class DoctorInMemory : IDoctorRepository
     {
-        private static List<Doctor> _doctors = new List<Doctor>();
+        private static readonly List<Doctor> Doctors = new();
 
         public async Task Add(Doctor doctor)
         {
-            _doctors.Add(doctor);
+            Doctors.Add(doctor);
         }
     }
 }

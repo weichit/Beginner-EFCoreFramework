@@ -8,6 +8,9 @@ builder.Services.AddAppointmentDb(builder.Configuration);
 builder.Services.AddTransient<IDoctorRepository, DoctorRepo>();
 builder.Services.AddTransient<IDoctorService, DoctorService>();
 
+builder.Services.AddTransient<IPatientRepository, PatientRepo>();
+builder.Services.AddTransient<IPatientService, PatientService>();
+
 
 builder.Services.AddControllers();
 

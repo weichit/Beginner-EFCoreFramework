@@ -6,7 +6,7 @@ namespace EFAssessment.Database;
 public class AppointmentDb : DbContext
 {
     public DbSet<Doctor> Doctors { get; set; }
-    //public DbSet<Product> Products { get; set; }
+    public DbSet<Patient> Patients { get; set; }
 
     public AppointmentDb(DbContextOptions<AppointmentDb> options) : base(options)
     {

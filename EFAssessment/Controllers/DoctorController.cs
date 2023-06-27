@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EFAssessment.Controllers
 {
+    [Controller]
     [Route("/doctors")]
     public class DoctorController : ControllerBase
     {
