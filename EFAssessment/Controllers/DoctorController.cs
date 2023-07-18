@@ -36,11 +36,11 @@ namespace EFAssessment.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromHeader] string? name)
+        public async Task<IActionResult> Get([FromHeader] Guid? doctorId)
         {
-            var doctorsResult = await _doctorService.Get(name);
+            var doctorsResult = await _doctorService.Get(doctorId);
             if (doctorsResult == null)
-                return BadRequest(" DoctorName not found !!! ");
+                return BadRequest(" Get list of timeslots by DoctorName not found !!! ");
             return Ok(doctorsResult);
         }
     }

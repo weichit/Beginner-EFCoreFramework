@@ -2,3 +2,19 @@
 
 ###
 GET {{url}}
+
+###
+GET {{url}}/doctors/a245fe4a-d402-451c-b9ed-9c1a04247482
+
+###
+POST {{url}}/doctors
+Content-Type: application/json
+
+{
+    "Id":"b245fe4a-d402-451c-b9ed-9c1a04247482",
+    "DoctorName":"KC",
+    "DoctorId":"8245fe4a-d402-451c-b9ed-9c1a04247482",
+    "IsReserved": false,
+    "Cost": 100.00,
+    "Time":"7/25/2023 10:00:00 AM"
+}

@@ -19,14 +19,19 @@ namespace EFAssessment.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public async Task<Doctor?> getByName(string name)
+        public async Task<Doctor?> getByDoctorId(Guid doctorId)
         {
-            return await _db.Doctors.Where(item => item.DoctorName == name).SingleOrDefaultAsync();
+            return await _db.Doctors.Where(item => item.DoctorId == doctorId).SingleOrDefaultAsync();
         }
 
         public async Task<List<Doctor>> GetAll()
         {
             return _db.Doctors.ToList();
+        }
+
+        public bool AvailabilityIsExist(Guid guid)
+        {
+            throw new NotImplementedException();
         }
     }
 }
