@@ -1,5 +1,6 @@
 ﻿using EFAssessment.Database;
 using EFAssessment.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFAssessment.Repositories
 {
@@ -18,5 +19,14 @@ namespace EFAssessment.Repositories
             await _db.SaveChangesAsync();
         }
 
+        public async Task<Doctor?> getByName(string name)
+        {
+            return await _db.Doctors.Where(item => item.DoctorName == name).SingleOrDefaultAsync();
+        }
+
+        public async Task<List<Doctor>> GetAll()
+        {
+            return _db.Doctors.ToList();
+        }
     }
 }

@@ -4,6 +4,7 @@ using EFAssessment.Entities;
 using Microsoft.AspNetCore.Mvc;
 using EFAssessment.Database;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace EFAssessment.Controllers
 {
@@ -11,23 +12,14 @@ namespace EFAssessment.Controllers
     [Route("/doctors")]
     public class DoctorController : ControllerBase
     {
-        private readonly IDoctorService _doctorService;
-        private AppointmentDb _db;
-
-        public DoctorController(AppointmentDb db, IDoctorService doctorService )
+        private IDoctorService _doctorService;
+        
+        public DoctorController(IDoctorService doctorService)
         {
-            _db = db;
             _doctorService = doctorService;
         }
 
         [HttpPost]
-        /*
-        public async Task<IActionResult> Post([FromBody] CreateDoctorRequest request)
-        {
-            await _doctorService.Create(request.DoctorName);
-            return Ok("Doctor availability created ... ");
-        }
-        */
         public async Task<IActionResult> Post([FromBody] Doctor doctor)
         {
             if (!ModelState.IsValid)
@@ -39,22 +31,17 @@ namespace EFAssessment.Controllers
                 return BadRequest(errors);
             }
 
-            await _doctorService.CreateDoctor(doctor);
-            _db.Doctors.Add(doctor);
-            await _db.SaveChangesAsync();
-            return Ok("Doctor availability created ... ");
+            await _doctorService.AddDoctor(doctor);
+            return Ok(" New timeslot is created !!! ");
         }
 
         [HttpGet]
         public async Task<IActionResult> Get([FromHeader] string? name)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                return Ok(_db.Doctors.ToList());    
-            }
-            var doctor = await _db.Doctors.Where(item => item.DoctorName == name).SingleOrDefaultAsync();
-            return Ok(doctor);
+            var doctorsResult = await _doctorService.Get(name);
+            if (doctorsResult == null)
+                return BadRequest(" DoctorName not found !!! ");
+            return Ok(doctorsResult);
         }
-
     }
 }

@@ -1,0 +1,4 @@
+﻿@url = https://localhost:7167/
+
+###
+GET {{url}}
