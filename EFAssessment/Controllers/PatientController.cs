@@ -12,12 +12,13 @@ namespace EFAssessment.Controllers
     [Route("/patients")]
     public class PatientController : ControllerBase
     {
-        private readonly IPatientService _patientService;
-        private AppointmentDb _db;
-        public PatientController(AppointmentDb db, IPatientService patientService)
+        private IPatientService _patientService;
+        private IDoctorService _doctorService;
+
+        public PatientController(IPatientService patientService, IDoctorService doctorService)
         {
-            _db = db;
             _patientService = patientService;
+            _doctorService = doctorService;
         }
 
         [HttpPost]
@@ -32,18 +33,19 @@ namespace EFAssessment.Controllers
                 return BadRequest(errors);
             }
 
-            await _patientService.CreatePatient(patient);
-            _db.Patients.Add(patient);  
-           
-            await _db.SaveChangesAsync();
-            return Ok("Booking Create ... ");
+            await _patientService.AddPatient(patient);
+            return Ok(" New Booking is Created ... ");
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAvailableSlots()
         {
-            var doctor = await _db.Doctors.Where(item => item.IsReversed == false).SingleOrDefaultAsync();
-            return Ok(doctor);
+            var slotsResult = await _patientService.GetAvailableSlots();
+            if (slotsResult == null)
+            {
+                return BadRequest(" Not available slots now !!! ");
+            }
+            return Ok(slotsResult);
         }
 
     }

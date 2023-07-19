@@ -43,5 +43,6 @@ namespace EFAssessment.Controllers
                 return BadRequest(" Get list of timeslots by DoctorName not found !!! ");
             return Ok(doctorsResult);
         }
+
     }
 }

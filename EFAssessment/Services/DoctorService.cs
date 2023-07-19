@@ -14,10 +14,6 @@ namespace EFAssessment.Services
 
         public async Task<List<Doctor>> Get(Guid? doctorId)
         {
-            /*if (string.IsNullOrEmpty(name))
-            {
-                return await _doctorRepository.GetAll();
-            }*/
             var doctor = await _doctorRepository.getByDoctorId((Guid)doctorId);
             if (doctor == null)
                 return new List<Doctor> { };
