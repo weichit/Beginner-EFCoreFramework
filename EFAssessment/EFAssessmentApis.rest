@@ -1,4 +1,4 @@
-﻿@url = https://localhost:7167/
+﻿@url = http://localhost:5167/
 
 ###
 GET {{url}}
@@ -17,4 +17,19 @@ Content-Type: application/json
     "IsReserved": false,
     "Cost": 100.00,
     "Time":"7/25/2023 10:00:00 AM"
+}
+
+###
+GET {{url}}/patients
+
+###
+POST {{url}}/patients
+Content-Type: application/json
+
+{
+    "Id": "1245fe4a-d402-451c-b9ed-9c1a04247482",
+    "SlotId": "b245fe4a-d402-451c-b9ed-9c1a04247482",
+    "PatientId": "1245fe4a-d402-451c-b9ed-9c1a04247483",
+    "PatientName": "Adams",
+    "ReservedAt": "7/17/2023 10:00:00 AM"
 }
