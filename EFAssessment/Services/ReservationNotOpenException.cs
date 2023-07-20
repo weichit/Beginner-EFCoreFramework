@@ -3,7 +3,7 @@
 namespace EFAssessment.Services
 {
     [Serializable]
-    internal class ReservationNotOpenException : Exception
+    public class ReservationNotOpenException : Exception
     {
         
         public ReservationNotOpenException(Guid soltId) : base($" Reservation for this {soltId} has closed !!! ")

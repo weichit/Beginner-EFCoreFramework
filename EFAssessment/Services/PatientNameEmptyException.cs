@@ -3,7 +3,7 @@
 namespace EFAssessment.Services
 {
     [Serializable]
-    internal class PatientNameEmptyException : Exception
+    public class PatientNameEmptyException : Exception
     {
         public PatientNameEmptyException() : base(" PatientName should not be empty !!! ")
         {

@@ -43,8 +43,8 @@ namespace EFAssessment.Services
                 throw new AvailabilityAlreadyExistsException(patient.Id);
             }
             // SlotId must be opened for reservation
-            var checkResult = _patientRepository.CheckAvailability(patient.SlotId);
-            if (checkResult == null)
+            var checkResult = _patientRepository.CheckSlotAvailability(patient.SlotId);
+            if (!checkResult)
             {
                 throw new ReservationNotOpenException(patient.SlotId);
             }

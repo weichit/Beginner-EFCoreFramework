@@ -8,5 +8,6 @@ namespace EFAssessment.Repositories
         public bool AvailabilityIsExist(Guid id);
         public Task<Doctor?> GetAvailableSlots();
         public Task<Doctor?> CheckAvailability(Guid slotId);
+        public bool CheckSlotAvailability(Guid slotId);
     }
 }

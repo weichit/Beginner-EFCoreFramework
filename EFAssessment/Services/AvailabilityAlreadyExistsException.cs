@@ -3,7 +3,7 @@
 namespace EFAssessment.Services
 {
     [Serializable]
-    internal class AvailabilityAlreadyExistsException : Exception
+    public class AvailabilityAlreadyExistsException : Exception
     {
         public AvailabilityAlreadyExistsException(Guid Id) : base($" Availability with Id {Id} is already existed !!! ")
         {

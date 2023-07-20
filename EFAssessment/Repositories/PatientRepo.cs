@@ -21,7 +21,7 @@ public class PatientRepo: IPatientRepository
 
     public bool AvailabilityIsExist(Guid id)
     {
-        throw new NotImplementedException();
+        return _db.Patients.Any(x => x.Id == id);
     }
 
     public async Task<Doctor?> GetAvailableSlots()
@@ -32,6 +32,11 @@ public class PatientRepo: IPatientRepository
     public async Task<Doctor?> CheckAvailability(Guid slotId)
     {
         return await _db.Doctors.Where(item => item.Id == slotId && item.IsReversed == false).SingleOrDefaultAsync();
+    }
+
+    public bool CheckSlotAvailability(Guid slotId)
+    {
+        return _db.Doctors.Any(item => item.Id == slotId && item.IsReversed == false);
     }
 
 }
