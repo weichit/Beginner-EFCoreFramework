@@ -42,12 +42,12 @@ namespace UnitTestIntermediateAssessment.Services
             var patientRepository = new Mock<IPatientRepository>();
             var testPatient = new Patient { SlotId = Guid.NewGuid() };
 
-            patientRepository.Setup(patientRepository => patientRepository.CheckSlotAvailability(testPatient.SlotId)).Returns(false);
+            patientRepository.Setup(patientRepository => patientRepository.CheckSlotAvailability(testPatient.SlotId)).Returns(true);
             var patientService = new PatientService(patientRepository.Object);
 
             //Act
             await patientService.AddPatient(testPatient);
-            //await Assert.ThrowsAsync<ReservationNotOpenException(testPatient.SlotId)> (async () => await patientService.AddPatient(testPatient));
+            //await Assert.ThrowsAsync<ReservationNotOpenException()> (async () => await patientService.AddPatient(new Patient { }));
             
             //Assert
             patientRepository.Verify(x => x.Add(It.IsAny<Patient>()));

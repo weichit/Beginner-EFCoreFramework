@@ -7,7 +7,5 @@ namespace EFAssessment.Services
         public Task<List<Doctor>> GetAvailableSlots();
         public Task AddPatient(Patient patient);
         public Task<List<Doctor>> CheckAvailability(Guid slotId);
-        //public bool CheckSlotAvailability(Guid slotId);
-
     }
 }
