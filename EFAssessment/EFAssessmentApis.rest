@@ -33,3 +33,11 @@ Content-Type: application/json
     "PatientName": "Adams",
     "ReservedAt": "7/17/2023 10:00:00 AM"
 }
+
+###
+POST {{url}}/login
+Content-Type: application/json
+
+{
+    "UserName": "admin"
+}

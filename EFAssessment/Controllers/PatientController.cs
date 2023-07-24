@@ -13,17 +13,18 @@ namespace EFAssessment.Controllers
     public class PatientController : ControllerBase
     {
         private IPatientService _patientService;
-        private IDoctorService _doctorService;
-
-        public PatientController(IPatientService patientService, IDoctorService doctorService)
+        private readonly ILogger<PatientController> _logger;
+     
+        public PatientController(IPatientService patientService, ILogger<PatientController> logger)
         {
             _patientService = patientService;
-            _doctorService = doctorService;
+            _logger = logger;
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Patient patient)
         {
+            _logger.LogDebug(" Booking requested by a patient !!! ");
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values
