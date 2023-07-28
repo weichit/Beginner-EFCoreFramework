@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using EFAssessment.Database;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EFAssessment.Controllers
 {
     [Controller]
     [Route("/doctors")]
+    [Authorize]
     public class DoctorController : ControllerBase
     {
         private IDoctorService _doctorService;

@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Numerics;
 using EFAssessment.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EFAssessment.Controllers
 {
     [Controller]
     [Route("/patients")]
+    [Authorize]
     public class PatientController : ControllerBase
     {
         private IPatientService _patientService;
@@ -35,6 +37,13 @@ namespace EFAssessment.Controllers
             }
 
             await _patientService.AddPatient(patient);
+
+            var getDoctor = await _patientService.CheckAvailability(patient.SlotId);
+            List<Doctor> bookedDoctor = getDoctor.ToList();
+            Doctor firstDoctor = bookedDoctor.First();
+
+            _logger.LogInformation(" Booking successful !!! A simple notification message for both patient ${patient} and doctor ${doctor} at appointment ${time}. ", 
+                patient.PatientName, firstDoctor.DoctorName, patient.ReversedAt);
             return Ok(" New Booking is Created ... ");
         }
 
