@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using AutoFixture;
 using Newtonsoft.Json;
 using EFAssessment.Services;
-using EFAssessment.Entities;
+using EFAssessment.Domain.Entities;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace UnitTestIntermediateAssessment;
