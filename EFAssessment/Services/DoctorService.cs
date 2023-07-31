@@ -1,6 +1,6 @@
 ﻿using EFAssessment.Entities;
-using EFAssessment.Repositories;
 using EFAssessment.Controllers.Dtos;
+using EFAssessment.Infrastructure.Repositories;
 
 namespace EFAssessment.Services
 {

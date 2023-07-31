@@ -1,7 +1,10 @@
-using EFAssessment.Entities;
-using EFAssessment.Repositories;
+using EFAssessment.Domain.Contracts;
+using EFAssessment.Domain.Exceptions;
+using EFAssessment.Domain.Entities;
+using EFAssessment.Application.Usecases;
 using EFAssessment.Services;
 using Moq;
+using EFAssessment.Controllers.Dtos;
 
 namespace UnitTestIntermediateAssessment.Services
 {
@@ -12,9 +15,9 @@ namespace UnitTestIntermediateAssessment.Services
         {
             //Arrange
             var patientRepository = new Mock<IPatientRepository>();         
-            var patientService = new PatientService(patientRepository.Object);
+            var patientService = new CreatePatient(patientRepository.Object);
             //Act
-            await Assert.ThrowsAsync<PatientNameEmptyException>(async () => await patientService.AddPatient(new Patient { }));
+            await Assert.ThrowsAsync<PatientNameEmptyException>(async () => await patientService.Execute(new CreatePatientRequest { }));
         }
 
         [Fact]
@@ -22,13 +25,13 @@ namespace UnitTestIntermediateAssessment.Services
         {
             //Arrange
             var patientRepository = new Mock<IPatientRepository>();
-            var testPatient = new Patient { Id = Guid.NewGuid() };
+            var testPatient = new CreatePatientRequest { Id = Guid.NewGuid() };
            
             patientRepository.Setup(patientRepository => patientRepository.AvailabilityIsExist(testPatient.Id)).Returns(false);
-            var patientService = new PatientService(patientRepository.Object);
+            var patientService = new CreatePatient(patientRepository.Object);
 
             //Act
-            await patientService.AddPatient(testPatient);
+            await patientService.Execute(testPatient);
 
             //Assert
             patientRepository.Verify(x => x.Add(It.IsAny<Patient>()));
@@ -40,13 +43,13 @@ namespace UnitTestIntermediateAssessment.Services
         {
             //Arrange
             var patientRepository = new Mock<IPatientRepository>();
-            var testPatient = new Patient { SlotId = Guid.NewGuid() };
+            var testPatient = new CreatePatientRequest { SlotId = Guid.NewGuid() };
 
             patientRepository.Setup(patientRepository => patientRepository.CheckSlotAvailability(testPatient.SlotId)).Returns(true);
-            var patientService = new PatientService(patientRepository.Object);
+            var patientService = new CreatePatient(patientRepository.Object);
 
             //Act
-            await patientService.AddPatient(testPatient);
+            await patientService.Execute(testPatient);
             //await Assert.ThrowsAsync<ReservationNotOpenException()> (async () => await patientService.AddPatient(new Patient { }));
             
             //Assert

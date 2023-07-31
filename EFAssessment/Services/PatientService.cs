@@ -1,5 +1,7 @@
-﻿using EFAssessment.Entities;
-using EFAssessment.Repositories;
+﻿/*
+using EFAssessment.Controllers.Dtos;
+using EFAssessment.Domain.Contracts;
+using EFAssessment.Entities;
 using EFAssessment.Services;
 
 namespace EFAssessment.Services
@@ -29,27 +31,30 @@ namespace EFAssessment.Services
             return new List<Doctor> { results };
         }
 
-        public async Task AddPatient(Patient patient)
+        public async Task CreatePatientRequest(CreatePatientRequest request)
         {
             // PatientName is not empty
-            if (!string.IsNullOrEmpty(patient.PatientName))
+            if (!string.IsNullOrEmpty(request.PatientName))
             {
                 throw new PatientNameEmptyException();
             }
             // Id used for booking must be unique
-            var exists = _patientRepository.AvailabilityIsExist(patient.Id);
+            var exists = _patientRepository.AvailabilityIsExist(request.Id);
             if (exists)
             {
-                throw new AvailabilityAlreadyExistsException(patient.Id);
+                throw new AvailabilityAlreadyExistsException(request.Id);
             }
             // SlotId must be opened for reservation
-            var checkResult = _patientRepository.CheckSlotAvailability(patient.SlotId);
+            var checkResult = _patientRepository.CheckSlotAvailability(request.SlotId);
             if (!checkResult)
             {
-                throw new ReservationNotOpenException(patient.SlotId);
+                throw new ReservationNotOpenException(request.SlotId);
             }
-           
+
+            // Convert to Patient domain model
+            var patient = Patient.CreateNew(request.PatientName, request.SlotId, request.PatientId, request.Id, request.ReversedAt);
             await _patientRepository.Add(patient);
         }
     }
 }
+*/

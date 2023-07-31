@@ -1,6 +1,6 @@
-﻿using EFAssessment.Entities;
+﻿using EFAssessment.Domain.Entities;
 
-namespace EFAssessment.Repositories
+namespace EFAssessment.Infrastructure.Repositories
 {
     public interface IDoctorRepository
     {
