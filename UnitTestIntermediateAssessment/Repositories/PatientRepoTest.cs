@@ -1,8 +1,9 @@
-﻿using EFAssessment.Database;
-using EFAssessment.Entities;
-using EFAssessment.Repositories;
+﻿using EFAssessment.Infrastructure.Database;
+using EFAssessment.Domain.Entities;
+using EFAssessment.Infrastructure.Repositories;
 using EntityFrameworkCoreMock;
 using Microsoft.EntityFrameworkCore;
+using EFAssessment.Controllers.Dtos;
 
 namespace UnitTestIntermediateAssessment.Repositories;
 
@@ -12,9 +13,9 @@ public class PatientRepoTest
     public void PatientNameIsExist_ShouldReturnFalse()
     {
         //Arrange
-        var testPatient = new Patient { Id = Guid.NewGuid() };
+        var testPatient = new CreatePatientRequest { Id = Guid.NewGuid() };
         var appointmentDatabase = new DbContextMock<AppointmentDb>(new DbContextOptionsBuilder<AppointmentDb>().Options);
-        appointmentDatabase.CreateDbSetMock(db => db.Patients, new List<Patient> { testPatient } );
+        appointmentDatabase.CreateDbSetMock(db => db.Patients, new List<Patient> {  } );
         var patientRepo = new PatientRepo(appointmentDatabase.Object);
 
         // Act

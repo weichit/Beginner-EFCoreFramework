@@ -1,4 +1,4 @@
-﻿using EFAssessment.Database;
+﻿using EFAssessment.Infrastructure.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
