@@ -1,7 +1,7 @@
-﻿using EFAssessment.Entities;
+﻿using EFAssessment.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFAssessment.Database;
+namespace EFAssessment.Infrastructure.Database;
 
 public class AppointmentDb : DbContext
 {

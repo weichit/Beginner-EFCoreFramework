@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace EFAssessment.Services
+namespace EFAssessment.Domain.Exceptions
 {
     [Serializable]
     public class ReservationNotOpenException : Exception

@@ -1,6 +1,6 @@
-﻿using EFAssessment.Entities;
+﻿using EFAssessment.Domain.Entities;
 
-namespace EFAssessment.Repositories
+namespace EFAssessment.Domain.Contracts
 {
     public interface IPatientRepository
     {

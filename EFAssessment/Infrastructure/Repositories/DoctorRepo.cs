@@ -1,5 +1,6 @@
-﻿using EFAssessment.Database;
-using EFAssessment.Entities;
+﻿using EFAssessment.Infrastructure.Database;
+using EFAssessment.Domain.Entities;
+using EFAssessment.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFAssessment.Repositories

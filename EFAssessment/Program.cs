@@ -1,10 +1,13 @@
-using EFAssessment.Database;
+using EFAssessment.Infrastructure.Database;
 using EFAssessment.Services;
 using EFAssessment.Repositories;
 using EFAssessment.Controllers;
 using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using EFAssessment.Security;
+using EFAssessment.Domain.Contracts;
+using EFAssessment.Application.Usecases;
+using EFAssessment.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog( (context, services, configuration) =>
@@ -30,7 +33,8 @@ builder.Services.AddTransient<IDoctorRepository, DoctorRepo>();
 builder.Services.AddTransient<IDoctorService, DoctorService>();
 builder.Services.AddTransient<JwtCreator>();
 builder.Services.AddTransient<IPatientRepository, PatientRepo>();
-builder.Services.AddTransient<IPatientService, PatientService>();
+//builder.Services.AddTransient<IPatientService, PatientService>();
+builder.Services.AddTransient<CreatePatient>();
 
 builder.Services.AddControllers();
 

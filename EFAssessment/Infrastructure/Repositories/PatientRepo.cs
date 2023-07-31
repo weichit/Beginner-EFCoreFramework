@@ -1,8 +1,9 @@
-﻿using EFAssessment.Database;
-using EFAssessment.Entities;
+﻿using EFAssessment.Infrastructure.Database;
+using EFAssessment.Domain.Contracts;
+using EFAssessment.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EFAssessment.Repositories;
+namespace EFAssessment.Infrastructure.Repositories;
 
 public class PatientRepo: IPatientRepository
 {

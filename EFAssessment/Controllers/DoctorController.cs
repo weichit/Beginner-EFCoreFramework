@@ -1,6 +1,6 @@
 ﻿using EFAssessment.Controllers.Dtos;
 using EFAssessment.Services;
-using EFAssessment.Entities;
+using EFAssessment.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using EFAssessment.Database;
 using Microsoft.EntityFrameworkCore;

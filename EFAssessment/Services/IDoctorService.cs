@@ -1,4 +1,4 @@
-﻿using EFAssessment.Entities;
+﻿using EFAssessment.Domain.Entities;
 
 namespace EFAssessment.Services
 {

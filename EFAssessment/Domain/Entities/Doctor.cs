@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EFAssessment.Entities
+namespace EFAssessment.Domain.Entities
 {
     public class Doctor
     {

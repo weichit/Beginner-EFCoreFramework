@@ -1,4 +1,4 @@
-﻿using EFAssessment.Entities;
+﻿using EFAssessment.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
