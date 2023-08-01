@@ -3,17 +3,20 @@ using System;
 using EFAssessment.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace EFAssessment.Migrations
+namespace EFAssessment.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(AppointmentDb))]
-    partial class AppointmentDbModelSnapshot : ModelSnapshot
+    [Migration("20230801034415_name")]
+    partial class name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,7 +26,7 @@ namespace EFAssessment.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("EFAssessment.Entities.Doctor", b =>
+            modelBuilder.Entity("EFAssessment.Domain.Entities.Doctor", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +53,7 @@ namespace EFAssessment.Migrations
                     b.ToTable("Doctors", "Appointment_Db");
                 });
 
-            modelBuilder.Entity("EFAssessment.Entities.Patient", b =>
+            modelBuilder.Entity("EFAssessment.Domain.Entities.Patient", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
