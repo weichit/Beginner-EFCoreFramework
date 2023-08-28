@@ -34,7 +34,13 @@ public class PatientRepo: IPatientRepository
     {
         return await _db.Doctors.Where(item => item.Id == slotId && item.IsReversed == false).SingleOrDefaultAsync();
     }
-
+    /*
+    public async Task UpdateReserved(Doctor doctor)
+    {
+        doctor.IsReversed = true;
+        await _db.SaveChangesAsync();
+    }
+    */
     public bool CheckSlotAvailability(Guid slotId)
     {
         return _db.Doctors.Any(item => item.Id == slotId && item.IsReversed == false);

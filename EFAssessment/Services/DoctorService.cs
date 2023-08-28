@@ -39,5 +39,21 @@ namespace EFAssessment.Services
             }
             await _doctorRepository.Add(doctor);
         }
+        
+        public async Task UpdatePatientReservation(Doctor doctor)
+        {
+            if (!string.IsNullOrEmpty(doctor.DoctorName))
+            {
+                throw new DoctorNameEmptyException();
+            }
+            // Id must be unique as a new slot
+            var exists = _doctorRepository.AvailabilityIsExist(doctor.Id);
+            if (exists)
+            {
+                throw new AvailabilityAlreadyExistsException(doctor.Id);
+            }
+            await _doctorRepository.UpdateReserved(doctor);
+        }
+        
     }
 }

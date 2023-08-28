@@ -2,16 +2,20 @@
 using EFAssessment.Domain.Contracts;
 using EFAssessment.Domain.Entities;
 using EFAssessment.Domain.Exceptions;
+using EFAssessment.Infrastructure.Repositories;
+using EFAssessment.Services;
 
 namespace EFAssessment.Application.Usecases;
 
 public class CreatePatient
 {
     private readonly IPatientRepository _patientRepository;
+    private readonly IDoctorRepository _doctorRepository;
 
-    public CreatePatient(IPatientRepository patientRepository)
+    public CreatePatient(IPatientRepository patientRepository, IDoctorRepository doctorRepository)
     {
         _patientRepository = patientRepository;
+        _doctorRepository = doctorRepository;
     }
 
     public async Task<List<Doctor>> GetAvailableSlots()
@@ -54,4 +58,20 @@ public class CreatePatient
         var patient = Patient.CreateNew(request.PatientName, request.SlotId, request.PatientId);
         await _patientRepository.Add(patient);
     }
+
+    public async Task UpdateReserved(Doctor doctor)
+    {
+        if (!string.IsNullOrEmpty(doctor.DoctorName))
+        {
+            throw new DoctorNameEmptyException();
+        }
+        // Id must be unique as a new slot
+        var exists = _doctorRepository.AvailabilityIsExist(doctor.Id);
+        if (exists)
+        {
+            throw new AvailabilityAlreadyExistsException(doctor.Id);
+        }
+        await _doctorRepository.UpdateReserved(doctor);
+    }
+   
 }

@@ -5,6 +5,7 @@ using EFAssessment.Application.Usecases;
 using EFAssessment.Services;
 using Moq;
 using EFAssessment.Controllers.Dtos;
+using EFAssessment.Infrastructure.Repositories;
 
 namespace UnitTestIntermediateAssessment.Services
 {
@@ -14,8 +15,9 @@ namespace UnitTestIntermediateAssessment.Services
         public async Task AddPatient_WhenPatientNameEmpty_ShouldThrowException()
         {
             //Arrange
-            var patientRepository = new Mock<IPatientRepository>();         
-            var patientService = new CreatePatient(patientRepository.Object);
+            var patientRepository = new Mock<IPatientRepository>(); 
+            var doctorRepository = new Mock<IDoctorRepository>();
+            var patientService = new CreatePatient(patientRepository.Object, doctorRepository.Object);
             //Act
             await Assert.ThrowsAsync<PatientNameEmptyException>(async () => await patientService.Execute(new CreatePatientRequest { }));
         }
@@ -25,10 +27,11 @@ namespace UnitTestIntermediateAssessment.Services
         {
             //Arrange
             var patientRepository = new Mock<IPatientRepository>();
+            var doctorRepository = new Mock<IDoctorRepository>();
             var testPatient = new CreatePatientRequest { Id = Guid.NewGuid() };
            
             patientRepository.Setup(patientRepository => patientRepository.AvailabilityIsExist(testPatient.Id)).Returns(false);
-            var patientService = new CreatePatient(patientRepository.Object);
+            var patientService = new CreatePatient(patientRepository.Object, doctorRepository.Object);
 
             //Act
             await patientService.Execute(testPatient);
@@ -43,10 +46,11 @@ namespace UnitTestIntermediateAssessment.Services
         {
             //Arrange
             var patientRepository = new Mock<IPatientRepository>();
+            var doctorRepository = new Mock<IDoctorRepository>();
             var testPatient = new CreatePatientRequest { SlotId = Guid.NewGuid() };
 
             patientRepository.Setup(patientRepository => patientRepository.CheckSlotAvailability(testPatient.SlotId)).Returns(true);
-            var patientService = new CreatePatient(patientRepository.Object);
+            var patientService = new CreatePatient(patientRepository.Object, doctorRepository.Object);
 
             //Act
             await patientService.Execute(testPatient);

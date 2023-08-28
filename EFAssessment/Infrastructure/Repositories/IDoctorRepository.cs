@@ -8,5 +8,6 @@ namespace EFAssessment.Infrastructure.Repositories
         public Task Add(Doctor doctor);
         public Task<Doctor?> getByDoctorId(Guid doctorId);
         public Task<List<Doctor>> GetAll();
+        public Task UpdateReserved(Doctor docotor);
     }
 }

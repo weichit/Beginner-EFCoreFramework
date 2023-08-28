@@ -39,7 +39,7 @@ namespace EFAssessment.Controllers
             var getDoctor = await _createPatient.CheckAvailability(patient.SlotId);
             List<Doctor> bookedDoctor = getDoctor.ToList();
             Doctor firstDoctor = bookedDoctor.First();
-
+            await _createPatient.UpdateReserved(firstDoctor);
             _logger.LogInformation(" Booking successful !!! A simple notification message for both patient ${patient} and doctor ${doctor} at appointment ${time}. ", 
                 patient.PatientName, firstDoctor.DoctorName, patient.ReversedAt);
             return Ok(" New Booking is Created ... ");

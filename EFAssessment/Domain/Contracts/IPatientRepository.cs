@@ -9,5 +9,6 @@ namespace EFAssessment.Domain.Contracts
         public Task<Doctor?> GetAvailableSlots();
         public Task<Doctor?> CheckAvailability(Guid slotId);
         public bool CheckSlotAvailability(Guid slotId);
+        //public Task UpdateReserved(Doctor doctor);  
     }
 }

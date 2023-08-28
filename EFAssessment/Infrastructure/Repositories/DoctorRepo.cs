@@ -35,6 +35,12 @@ namespace EFAssessment.Repositories
         {
             throw new NotImplementedException();
         }
-
+        
+        public async Task UpdateReserved(Doctor doctor)
+        {
+            doctor.IsReversed = true;
+            await _db.SaveChangesAsync();
+        }
+        
     }
 }
